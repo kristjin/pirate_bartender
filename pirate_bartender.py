@@ -16,6 +16,22 @@ ingredients = {
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"]
 }
 
+adjectives = {
+    "strong": ["Able-bodied", "Athletic", "Hardened"],
+    "salty": ["Briny", "Saline", "Raspy"],
+    "bitter": ["Acrid", "Harsh", "Astringent"],
+    "sweet": ["Syrupy", "Saccharine", "Cloying"],
+    "fruity": ["Mellow", "Pleasant", "Fruitalicious"]
+}
+
+nouns = {
+    "strong": ["Anvil", "Hammer", "Gunshot"],
+    "salty": ["Salt Box", "Salt Lick", "Saltine"],
+    "bitter": ["Pisser", "Old Man", "Old Cuss"],
+    "sweet": ["Sweetheart", "Pollyanna", "Dollface"],
+    "fruity": ["Cobbler", "Orchard", "Fruitcake"]
+}
+
 def getInput():
     prefs = []
     for q in questions:
@@ -31,7 +47,30 @@ def constructDrink(prefs):
         components.append(choice)
     return components
 
+def splainDrink(components):
+    print "Ye take the following ingredients:"
+    for c in components:
+        print c
+    print "And ye mix them thoroughly, and serve over ice.  Yarr, thar ye be."
+    return True
+
+def nameDrink(prefs):
+    adj = random.choice(adjectives[random.choice(prefs)])
+    noun = random.choice(nouns[random.choice(prefs)])
+    name = "The " + adj + " " + noun
+    return name
+
+def makeDrink():
+    prefs = getInput()
+    components = constructDrink(prefs)
+    splainDrink(components)
+    print "I call it " + nameDrink(prefs)
+
+
 if __name__ == '__main__':
-    foo = getInput()
-    print constructDrink(foo)
-   
+    print "Oh hello there.  Let me get ye a drink.  It's all I can offer ye, besides the scurvy."
+    makeDrink()
+    will_have_another = raw_input("Would ye like another? Type y or yes if so.  ")
+    while will_have_another == "y" or will_have_another == "yes":
+        makeDrink()
+        will_have_another = raw_input("Would ye like another?  Type y or yes if so.  ")
